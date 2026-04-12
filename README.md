@@ -39,7 +39,7 @@ jobsalaryprediction/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/jobsalaryprediction.git
+git clone https://github.com/ramashishmaurya/jobsalaryprediction.git
 cd jobsalaryprediction
 ```
 
