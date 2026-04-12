@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Salary Predictor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+            outline: none;
+            color: #333;
+        }
+
+        input:focus, select:focus {
+            border-color: #667eea;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            margin-top: 24px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0fff4, #e6fffa);
+            border: 2px solid #38a169;
+            border-radius: 12px;
+            text-align: center;
+            display: none;
+        }
+
+        .result h2 {
+            color: #276749;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .result .salary {
+            color: #22543d;
+            font-size: 36px;
+            font-weight: 800;
+        }
+
+        .error {
+            margin-top: 24px;
+            padding: 16px;
+            background: #fff5f5;
+            border: 2px solid #fc8181;
+            border-radius: 12px;
+            color: #c53030;
+            text-align: center;
+            display: none;
+            font-weight: 600;
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 16px;
+            color: #667eea;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>💼 Salary Predictor</h1>
+    <p class="subtitle">Fill in your details to predict your salary</p>
+
+    <div class="form-group">
+        <label>Job Title</label>
+        <select id="job_title">
+            <option value="Backend Developer">Backend Developer</option>
+            <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+            <option value="Product Manager">Product Manager</option>
+            <option value="AI Engineer">AI Engineer</option>
+            <option value="Data Scientist">Data Scientist</option>
+            <option value="DevOps Engineer">DevOps Engineer</option>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="Data Analyst">Data Analyst</option>
+            <option value="Cloud Engineer">Cloud Engineer</option>
+            <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+            <option value="Business Analyst">Business Analyst</option>
+            <option value="Frontend Developer ">Frontend Developer </option>
+            
+        </select>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label>Experience (Years)</label>
+            <input type="number" id="experience_years" placeholder="e.g. 3" min="0" max="50">
+        </div>
+        <div class="form-group">
+            <label>Skills Count</label>
+            <input type="number" id="skills_count" placeholder="e.g. 5" min="0">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Education Level</label>
+        <select id="education_level">
+            <option value="Bachelor's">Bachelor's</option>
+            <option value="Master's">Master's</option>
+            <option value="PhD">PhD</option>
+            <option value="High School">High School</option>
+            <option value="Associate">Associate</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label>Industry</label>
+            <select id="industry">
+                <option value="Technology">Technology</option>
+                <option value="Finance">Finance</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Education">Education</option>
+                <option value="Retail">Retail</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Company Size</label>
+            <select id="company_size">
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label>Location</label>
+            <select id="location">
+                <option value="New York">New York</option>
+                <option value="San Francisco">San Francisco</option>
+                <option value="Austin">Austin</option>
+                <option value="Chicago">Chicago</option>
+                <option value="Seattle">Seattle</option>
+                <option value="Remote">Remote</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Remote Work</label>
+            <select id="remote_work">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Hybrid">Hybrid</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Certifications Count</label>
+        <input type="number" id="certifications" placeholder="e.g. 2" min="0">
+    </div>
+
+    <button onclick="predictSalary()" id="btn">🔮 Predict Salary</button>
+
+    <div class="loader" id="loader">⏳ Predicting your salary...</div>
+
+    <div class="result" id="result">
+        <h2>🎉 Predicted Salary</h2>
+        <div class="salary" id="salary-value"></div>
+    </div>
+
+    <div class="error" id="error"></div>
+</div>
+
+<script>
+    async function predictSalary() {
+        const btn = document.getElementById('btn');
+        const loader = document.getElementById('loader');
+        const resultDiv = document.getElementById('result');
+        const errorDiv = document.getElementById('error');
+
+        // Hide previous results
+        resultDiv.style.display = 'none';
+        errorDiv.style.display = 'none';
+
+        // Get values
+        const experience_years = parseInt(document.getElementById('experience_years').value);
+        const skills_count = parseInt(document.getElementById('skills_count').value);
+        const certifications = parseInt(document.getElementById('certifications').value);
+
+        // Validation
+        if (isNaN(experience_years) || isNaN(skills_count) || isNaN(certifications)) {
+            errorDiv.textContent = '⚠️ Please fill all fields correctly!';
+            errorDiv.style.display = 'block';
+            return;
+        }
+
+        const payload = {
+            job_title: document.getElementById('job_title').value,
+            experience_years: experience_years,
+            education_level: document.getElementById('education_level').value,
+            skills_count: skills_count,
+            industry: document.getElementById('industry').value,
+            company_size: document.getElementById('company_size').value,
+            location: document.getElementById('location').value,
+            remote_work: document.getElementById('remote_work').value,
+            certifications: certifications
+        };
+
+        btn.disabled = true;
+        loader.style.display = 'block';
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                const salary = data.predicted_salary.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    maximumFractionDigits: 0
+                });
+                document.getElementById('salary-value').textContent = salary;
+                resultDiv.style.display = 'block';
+            } else {
+                errorDiv.textContent = '❌ Error: ' + (data.detail || 'Something went wrong!');
+                errorDiv.style.display = 'block';
+            }
+
+        } catch (err) {
+            errorDiv.textContent = '❌ Cannot connect to API. Make sure FastAPI server is running!';
+            errorDiv.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            loader.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
