@@ -6,7 +6,7 @@ A Machine Learning-powered REST API built with **FastAPI** that predicts job sal
 
 ## 🚀 Demo
 
-<a href='https://jobsalaryprediction.onrender.com/'>Click here to see my project</a>
+<a href='https://jobsalaryprediction-1.onrender.com'>Click here to see my project</a>
 
 ---
 
