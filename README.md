@@ -6,7 +6,7 @@ A Machine Learning-powered REST API built with **FastAPI** that predicts job sal
 
 ## 🚀 Demo
 
-> Fill in your job details → Hit Predict → Get your estimated salary instantly!
+<a href='https://jobsalaryprediction.onrender.com/'>Click here to see my project</a>
 
 ---
 
@@ -145,8 +145,8 @@ FastAPI provides auto-generated docs:
 
 ## 🙌 Author
 
-Made with ❤️ by **[Your Name]**  
-GitHub: [@yourusername](https://github.com/yourusername)
+Made with ❤️ by **[Ashish Maurya]**  
+GitHub: [@ramashishmaurya](https://github.com/ramashishmaurya)
 
 ---
 
