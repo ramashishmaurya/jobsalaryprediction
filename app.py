@@ -1,5 +1,6 @@
 from fastapi import FastAPI 
 from pydantic import BaseModel
+from fastapi.responses import FileResponse
 from typing import Literal
 import joblib
 import pandas as pd
@@ -29,9 +30,10 @@ class EmployeeData(BaseModel):
     remote_work: str
     certifications: int
 
-@app.get('/')
-def home():
-    return {'message': 'Salary prediction API is running'}
+
+@app.get("/")
+async def serve_frontend():
+    return FileResponse("index.html")
 
 @app.post('/predict')
 def predict(data: EmployeeData):
