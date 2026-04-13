@@ -4,13 +4,13 @@ from fastapi.responses import FileResponse
 from typing import Literal
 import joblib
 import pandas as pd
-from fastapi.middleware.cors import CORSMiddleware  # ✅ add karo
+from fastapi.middleware.cors import CORSMiddleware 
 
 model = joblib.load('./models.pkl')
 
 app = FastAPI() 
 
-# ✅ Ye block add karo
+# this code is for the middleware browser and backend 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
