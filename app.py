@@ -20,7 +20,7 @@ app.add_middleware(
 )
 
 class EmployeeData(BaseModel):
-    job_title: Literal["Backend Developer", "Cybersecurity Analyst" ,'Product Manager','AI Engineer ','Data Scientist','DevOps Engineer','Software Engineer','Data Analyst ','Cloud Engineer ','Machine Learning Engineer','Business Analyst','Frontend Developer']
+    job_title: Literal["Backend Developer", "Cybersecurity Analyst" ,'Product Manager','AI Engineer','Data Scientist','DevOps Engineer','Software Engineer','Data Analyst','Cloud Engineer ','Machine Learning Engineer','Business Analyst','Frontend Developer']
     experience_years: int
     education_level: str
     skills_count: int
